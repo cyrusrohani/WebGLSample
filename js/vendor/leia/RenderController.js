@@ -1,11 +1,8 @@
-//import { m4 } from "../twgl/twgl.js";
 import { V_SHADER } from "./shaders/VertexShader.js";
 import { FRAG_SHADER } from "./shaders/FragmentShader.js";
 import { VIEWSHARPENING_SHADER } from "./shaders/ViewSharpeningShader.js";
 import ConfigController from "./ConfigController.js";
 import BackLightController from "./BackLightController.js";
-
-//console.log('render controller.js', m4);
 
 var CAMCOUNT = 4;
 
@@ -378,12 +375,11 @@ export default {
   },
   calculateProjectionMatrix(camCount, orientation, renderTextureResolution, camType,
     fov, convergenceDistance, localCamPosition, near, far) {
-      var projectionMatrix  ;
-    //let projectionMatrix = m4.identity;
+    var projectionMatrix;
     if (camType == "perspective") {
-      projectionMatrix = /*m4.*/perspective(fov, this.aspectRatio, near, far);
+      projectionMatrix = perspective(fov, this.aspectRatio, near, far);
     } else {
-      projectionMatrix = /*m4.*/ortho(-20, 20, -20, 20, near, far);
+      projectionMatrix = ortho(-20, 20, -20, 20, near, far);
     }
     let shearY = projectionMatrix[0] * localCamPosition / convergenceDistance;
     projectionMatrix[8] = -shearY;
@@ -552,51 +548,6 @@ function ortho(left, right, bottom, top, near, far) {
 
   return dst;
 }
-/*
-function perspective(fieldOfViewYInRadians, aspect, zNear, zFar, dst) {
-  dst = dst || new MatType(16);
-  var f = Math.tan(Math.PI * 0.5 - 0.5 * fieldOfViewYInRadians);
-  var rangeInv = 1.0 / (zNear - zFar);
-  dst[0] = f / aspect;
-  dst[1] = 0;
-  dst[2] = 0;
-  dst[3] = 0;
-  dst[4] = 0;
-  dst[5] = f;
-  dst[6] = 0;
-  dst[7] = 0;
-  dst[8] = 0;
-  dst[9] = 0;
-  dst[10] = (zNear + zFar) * rangeInv;
-  dst[11] = -1;
-  dst[12] = 0;
-  dst[13] = 0;
-  dst[14] = zNear * zFar * rangeInv * 2;
-  dst[15] = 0;
-  return dst;
-}function ortho(left, right, bottom, top, near, far, dst) {
-  dst = dst || new MatType(16);
-  dst[0] = 2 / (right - left);
-  dst[1] = 0;
-  dst[2] = 0;
-  dst[3] = 0;
-  dst[4] = 0;
-  dst[5] = 2 / (top - bottom);
-  dst[6] = 0;
-  dst[7] = 0;
-  dst[8] = 0;
-  dst[9] = 0;
-  dst[10] = 2 / (near - far);
-  dst[11] = 0;
-  dst[12] = (right + left) / (left - right);
-  dst[13] = (top + bottom) / (bottom - top);
-  dst[14] = (far + near) / (near - far);
-  dst[15] = 1;
-  return dst;
-}
-
-*/
-
 
 // Converts from degrees to radians.
 function degreeToRadians(degrees) {

@@ -485,12 +485,3 @@ export const DisplayConfigs = Object.freeze({
         ]
     }
 })
-
-/*module.exports = {
-    BACKLIGHT_URL: BACKLIGHT_URL,
-    BacklightMode: BacklightMode,
-    DisplayConfigs: DisplayConfigs,
-    DeviceIds, DeviceIds,
-    DeviceIdConfigMap: DeviceIdConfigMap
-}
-*/
